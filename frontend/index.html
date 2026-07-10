@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>AI Study Assistant</title>
+
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+
+    <!-- Icons -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+
+    <!-- Markdown Highlight -->
+    <link rel="stylesheet"
+        href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/styles/github-dark.min.css">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body>
+
+    <div class="app">
+
+        <!-- ===========================
+             Sidebar
+        ============================ -->
+
+        <aside class="sidebar" id="sidebar">
+
+            <div class="sidebar-top">
+
+                <button id="newChatBtn" class="new-chat-btn">
+                    <i class="fa-solid fa-plus"></i>
+                    <span>New Chat</span>
+                </button>
+
+            </div>
+
+            <div class="history-title">
+
+                <i class="fa-solid fa-clock-rotate-left"></i>
+
+                <span>Recent Chats</span>
+
+            </div>
+
+            <div id="historyList" class="history-list">
+
+                <!-- Chat History -->
+
+            </div>
+
+            <div class="sidebar-bottom">
+
+                <button id="clearHistoryBtn" class="sidebar-btn">
+
+                    <i class="fa-solid fa-trash"></i>
+
+                    <span>Clear History</span>
+
+                </button>
+
+                <button id="themeBtn" class="sidebar-btn">
+
+                    <i class="fa-solid fa-moon"></i>
+
+                    <span>Dark Mode</span>
+
+                </button>
+
+            </div>
+
+        </aside>
+
+        <!-- ===========================
+             Main Area
+        ============================ -->
+
+        <main class="main">            <!-- ===========================
+                 Header
+            ============================ -->
+
+            <header class="topbar">
+
+                <div class="topbar-left">
+
+                    <button id="menuBtn" class="icon-btn">
+                        <i class="fa-solid fa-bars"></i>
+                    </button>
+
+                    <div>
+
+                        <h2>AI Study Assistant</h2>
+
+                        <p>Your Personal Learning Assistant</p>
+
+                    </div>
+
+                </div>
+
+                <div class="topbar-right">
+
+                    <button id="scrollBottomBtn" class="icon-btn" title="Scroll to Bottom">
+                        <i class="fa-solid fa-arrow-down"></i>
+                    </button>
+
+                </div>
+
+            </header>
+
+            <!-- ===========================
+                 Chat Container
+            ============================ -->
+
+            <section id="chatContainer" class="chat-container">
+
+                <!-- Welcome Screen -->
+
+                <div id="welcomeScreen" class="welcome-screen">
+
+                    <div class="welcome-icon">
+                        <i class="fa-solid fa-graduation-cap"></i>
+                    </div>
+
+                    <h1>AI Study Assistant</h1>
+
+                    <p>
+                        Ask anything about programming, science,
+                        mathematics, history, or any study topic.
+                    </p>
+
+                    <div class="suggestion-grid">
+
+                        <button class="suggestion-card">
+                            Explain Python in simple language.
+                        </button>
+
+                        <button class="suggestion-card">
+                            Difference between AI and Machine Learning.
+                        </button>
+
+                        <button class="suggestion-card">
+                            Write C program for Bubble Sort.
+                        </button>
+
+                        <button class="suggestion-card">
+                            Explain DBMS with examples.
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <!-- Messages -->
+
+                <div id="chatMessages" class="chat-messages">
+
+                    <!-- Dynamic Chat -->
+
+                </div>
+
+                <!-- Typing -->
+
+                <div id="typingIndicator" class="typing-indicator hidden">
+
+                    <div class="typing-avatar">
+                        <i class="fa-solid fa-robot"></i>
+                    </div>
+
+                    <div class="typing-bubble">
+
+                        <span></span>
+                        <span></span>
+                        <span></span>
+
+                    </div>
+
+                </div>
+
+            </section>            <!-- ===========================
+                 Chat Input Area
+            ============================ -->
+
+            <section class="chat-input-section">
+
+                <div class="chat-input-wrapper">
+
+                    <textarea
+                        id="question"
+                        placeholder="Ask anything..."
+                        rows="1"
+                        autocomplete="off"></textarea>
+
+                    <div class="input-actions">
+
+                        <button id="clearInputBtn"
+                            class="circle-btn"
+                            title="Clear Input">
+
+                            <i class="fa-solid fa-xmark"></i>
+
+                        </button>
+
+                        <button id="sendBtn"
+                            class="send-btn"
+                            title="Send">
+
+                            <i class="fa-solid fa-paper-plane"></i>
+
+                        </button>
+
+                    </div>
+
+                </div>
+
+                <div class="input-footer">
+
+                    <span>
+                        Press <strong>Enter</strong> to send &
+                        <strong>Shift + Enter</strong> for a new line.
+                    </span>
+
+                </div>
+
+            </section>
+
+        </main>
+
+    </div>
+
+    <!-- ===========================
+         Delete History Modal
+    ============================ -->
+
+    <div id="deleteModal" class="modal hidden">
+
+        <div class="modal-content">
+
+            <h3>Clear Chat History?</h3>
+
+            <p>
+                This action cannot be undone.
+            </p>
+
+            <div class="modal-buttons">
+
+                <button id="cancelDelete"
+                    class="secondary-btn">
+
+                    Cancel
+
+                </button>
+
+                <button id="confirmDelete"
+                    class="danger-btn">
+
+                    Delete
+
+                </button>
+
+            </div>
+
+        </div>
+
+    </div>    <!-- ===========================
+         Markdown Parser
+    ============================ -->
+    <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
+
+    <!-- ===========================
+         Code Highlight
+    ============================ -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.10.0/highlight.min.js"></script>
+
+    <script>
+        marked.setOptions({
+            breaks: true,
+            gfm: true,
+            highlight: function (code, language) {
+                if (language && hljs.getLanguage(language)) {
+                    return hljs.highlight(code, {
+                        language: language
+                    }).value;
+                }
+                return hljs.highlightAuto(code).value;
+            }
+        });
+    </script>
+
+    <!-- Main JavaScript -->
+    <script src="script.js"></script>
+
+</body>
+
+</html>
