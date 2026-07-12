@@ -33,7 +33,7 @@ document.getElementById("scrollBottomBtn");
 // Backend
 // ===============================
 
-const API_URL = "/ask";
+const API_URL = "https://ai-study-assistant-ilhf.onrender.com/ask";
 
 // ===============================
 // Variables
