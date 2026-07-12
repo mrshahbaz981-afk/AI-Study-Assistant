@@ -22,7 +22,7 @@ class Question(BaseModel):
 
 
 @app.get("/")
-def home():
+def home():a
     return {
         "status": "success",
         "message": "AI Study Assistant API is running"

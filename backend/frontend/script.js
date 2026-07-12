@@ -2,6 +2,7 @@
 // ===============================
 // Elements
 // ===============================
+alert(API_URL);
 
 const question = document.getElementById("question");
 const sendBtn = document.getElementById("sendBtn");
