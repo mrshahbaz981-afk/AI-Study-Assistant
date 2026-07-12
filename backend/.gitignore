@@ -1,12 +1,4 @@
-venv/
-.env
-__pycache__/
 
-*.pyc
-*.pyo
-*.pyd
-.vscode/
-.DS_Store
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml

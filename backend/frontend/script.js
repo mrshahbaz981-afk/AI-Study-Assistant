@@ -33,7 +33,7 @@ document.getElementById("scrollBottomBtn");
 // Backend
 // ===============================
 
-const API_URL = "http://127.0.0.1:8000/ask";
+const API_URL = "http://ai-study-assistant-env.eba-68yugnrn.ap-south-1.elasticbeanstalk.com/ask";
 
 // ===============================
 // Variables

@@ -4,7 +4,9 @@ from pydantic import BaseModel
 
 from gemini import ask_gemini
 
-app = FastAPI()
+app = FastAPI(
+    title="AI Study Assistant API"
+)
 
 app.add_middleware(
     CORSMiddleware,
@@ -14,14 +16,29 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
+
 class Question(BaseModel):
     question: str
 
+
 @app.get("/")
 def home():
-    return {"message": "AI Study Assistant API is running"}
+    return {
+        "status": "success",
+        "message": "AI Study Assistant API is running"
+    }
+
+
+@app.get("/health")
+def health():
+    return {
+        "status": "healthy"
+    }
+
 
 @app.post("/ask")
 def ask(data: Question):
     answer = ask_gemini(data.question)
-    return {"answer": answer}
+    return {
+        "answer": answer
+    }
