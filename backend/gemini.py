@@ -6,7 +6,11 @@ from google import genai
 load_dotenv()
 
 # Create Gemini client
-client = genai.Client(api_key=os.getenv("GEMINI_API_KEY"))
+api_key = os.getenv("GEMINI_API_KEY")
+print("API KEY FOUND:", api_key is not None)
+print("API KEY PREFIX:", api_key[:10] if api_key else "None")
+
+client = genai.Client(api_key=api_key)
 
 def ask_gemini(question):
     try:
