@@ -96,8 +96,10 @@ menuBtn.addEventListener("click", () => {
 
     if (window.innerWidth <= 900) {
 
-        sidebarOverlay.classList.remove("hidden");
-        sidebarOverlay.classList.toggle("show");
+    sidebarOverlay.classList.toggle(
+    "show",
+    !sidebar.classList.contains("hide")
+);
 
     }
 
@@ -105,12 +107,10 @@ menuBtn.addEventListener("click", () => {
 
     if (closeSidebarBtn) {
 
-   closeSidebarBtn.addEventListener("click", () => {
+closeSidebarBtn.addEventListener("click", () => {
 
     sidebar.classList.add("hide");
-
     sidebarOverlay.classList.remove("show");
-    sidebarOverlay.classList.add("hidden");
 
 });
 
@@ -119,9 +119,7 @@ menuBtn.addEventListener("click", () => {
 sidebarOverlay.addEventListener("click", () => {
 
     sidebar.classList.add("hide");
-
     sidebarOverlay.classList.remove("show");
-    sidebarOverlay.classList.add("hidden");
 
 });
 
@@ -129,9 +127,10 @@ themeBtn.addEventListener("click", () => {
 
     toggleTheme();
 
-    if (window.innerWidth <= 768) {
+    if (window.innerWidth <= 900) {
 
         sidebar.classList.add("hide");
+        sidebarOverlay.classList.remove("show");
 
     }
 
