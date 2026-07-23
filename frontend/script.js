@@ -23,11 +23,16 @@ const cancelDelete = document.getElementById("cancelDelete");
 
 const menuBtn = document.getElementById("menuBtn");
 const sidebar = document.getElementById("sidebar");
+const closeSidebarBtn = document.getElementById("closeSidebarBtn");
 
 const themeBtn = document.getElementById("themeBtn");
 
+
 const scrollBottomBtn =
 document.getElementById("scrollBottomBtn");
+
+const sidebarOverlay =
+document.getElementById("sidebarOverlay");
 
 // ===============================
 // Backend
@@ -89,15 +94,60 @@ menuBtn.addEventListener("click", () => {
 
     sidebar.classList.toggle("hide");
 
+    if (window.innerWidth <= 900) {
+
+        sidebarOverlay.classList.remove("hidden");
+        sidebarOverlay.classList.toggle("show");
+
+    }
+
 });
 
-themeBtn.addEventListener("click", toggleTheme);
+    if (closeSidebarBtn) {
+
+   closeSidebarBtn.addEventListener("click", () => {
+
+    sidebar.classList.add("hide");
+
+    sidebarOverlay.classList.remove("show");
+    sidebarOverlay.classList.add("hidden");
+
+});
+
+}
+
+sidebarOverlay.addEventListener("click", () => {
+
+    sidebar.classList.add("hide");
+
+    sidebarOverlay.classList.remove("show");
+    sidebarOverlay.classList.add("hidden");
+
+});
+
+themeBtn.addEventListener("click", () => {
+
+    toggleTheme();
+
+    if (window.innerWidth <= 768) {
+
+        sidebar.classList.add("hide");
+
+    }
+
+});
 
 scrollBottomBtn.addEventListener("click", scrollBottom);
 
 clearHistoryBtn.addEventListener("click", () => {
 
     deleteModal.classList.remove("hidden");
+
+    // Close sidebar only on mobile/tablet
+    if (window.innerWidth <= 768) {
+        sidebar.classList.add("hide");
+        sidebarOverlay.classList.remove("show");
+    }
 
 });
 
@@ -254,7 +304,9 @@ chatMessages.appendChild(message);
 
     scrollBottom();
 
-}// ===============================
+}
+
+//===============================
 // Chat History
 // ===============================
 
@@ -307,9 +359,19 @@ function renderHistory() {
 
         item.onclick = () => {
 
-            openChat(index);
+    openChat(index);
 
-        };
+    if (window.innerWidth <= 900) {
+
+        sidebar.classList.add("hide");
+
+        if (sidebarOverlay) {
+            sidebarOverlay.classList.remove("show");
+        }
+
+    }
+
+};
 
         historyList.appendChild(item);
 
@@ -335,6 +397,13 @@ function openChat(index) {
 
     renderHistory();
 
+    if (window.innerWidth <= 900) {
+    sidebar.classList.toggle("hide");
+    sidebarOverlay.classList.remove("show");
+}
+
+    
+
 }
 
 function startNewChat() {
@@ -353,6 +422,17 @@ function startNewChat() {
 
     renderHistory();
 
+    if (window.innerWidth <= 900) {
+
+    sidebar.classList.add("hide");
+
+    if (sidebarOverlay) {
+        sidebarOverlay.classList.remove("show");
+    }
+
+}
+
+    
 }
 
 function loadHistory() {
@@ -512,16 +592,27 @@ window.addEventListener("keydown", e => {
 // ===============================
 // Sidebar Responsive
 // ===============================
+function handleSidebarLayout(){
 
-window.addEventListener("resize", () => {
+    if(window.innerWidth <= 900){
 
-    if (window.innerWidth > 900) {
+        sidebar.classList.add("hide");
+        sidebarOverlay.classList.remove("show");
+
+    }else{
 
         sidebar.classList.remove("hide");
+        sidebarOverlay.classList.remove("show");
 
     }
 
-});
+}
+
+// Run once when page loads
+handleSidebarLayout();
+
+// Run again on resize
+window.addEventListener("resize", handleSidebarLayout);
 
 // ===============================
 // Initial Scroll

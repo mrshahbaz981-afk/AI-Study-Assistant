@@ -606,7 +606,7 @@ CHAT MESSAGE
 
 .message-content{
 
-    max-width:80%;
+    max-width:72%;
 
     background:var(--card);
 
@@ -1084,41 +1084,41 @@ RESPONSIVE
 
 @media (max-width:900px){
 
-    .sidebar{
+.sidebar{
 
-        position:fixed;
+         position: fixed;
 
-        left:0;
+          left: 0;
 
-        top:0;
+          top: 0;
 
-        bottom:0;
+        bottom: 0;
 
-        z-index:1000;
-
-    }
-
-    .sidebar.hide{
-
-        transform:translateX(-100%);
-
-        margin-left:0;
-
-    }
-
-    .chat-input-section{
-
-        left:0;
-
-    }
-
-    .message-content{
-
-        max-width:100%;
-
-    }
+         z-index: 1000;
 
 }
+
+.sidebar.hide{
+
+         transform: translateX(-100%);
+        margin-left:0;
+
+}
+
+.chat-input-section{
+
+        left:0;
+
+}
+
+.message-content{
+
+max-width:100%;
+
+}
+
+}
+
 
 @media (max-width:600px){
 
@@ -1218,4 +1218,22 @@ COPY BUTTON
 
     margin-right:6px;
 
+}/* ==========================
+   Mobile Sidebar Overlay
+========================== */
+
+.sidebar-overlay{
+    position: fixed;
+    inset: 0;
+    background: rgba(0,0,0,.45);
+    backdrop-filter: blur(2px);
+    z-index: 999;
+    opacity: 0;
+    visibility: hidden;
+    transition: .25s ease;
+}
+
+.sidebar-overlay.show{
+    opacity: 1;
+    visibility: visible;
 }

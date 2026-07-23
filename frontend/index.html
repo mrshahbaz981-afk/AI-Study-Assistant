@@ -23,6 +23,9 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="style.css">
+
+    <link rel="stylesheet" href="mobile.css">
+
 </head>
 
 <body>
@@ -34,6 +37,16 @@
         ============================ -->
 
         <aside class="sidebar" id="sidebar">
+
+            <div class="mobile-sidebar-header">
+
+    <h3>Menu</h3>
+
+    <button id="closeSidebarBtn" class="icon-btn" aria-label="Close Menu">
+        <i class="fa-solid fa-xmark"></i>
+    </button>
+
+</div>
 
             <div class="sidebar-top">
 
@@ -79,6 +92,8 @@
             </div>
 
         </aside>
+
+        <div id="sidebarOverlay" class="sidebar-overlay hidden"></div>
 
         <!-- ===========================
              Main Area
@@ -297,6 +312,7 @@
 
     <!-- Main JavaScript -->
     <script src="script.js"></script>
+    
 
 </body>
 
